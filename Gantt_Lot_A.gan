@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2023-02-28" view-index="0" gantt-divider-location="300" resource-divider-location="300" version="3.0.2914" locale="fr_FR">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="166" order="0"/>
+        <field id="tpd4" name="Date de début" width="64" order="1"/>
+        <field id="tpd5" name="Date de fin" width="64" order="2"/>
+        <option id="taskLabelUp" value="taskDates"/>
+        <option id="taskLabelDown" value="length"/>
+        <option id="taskLabelLeft" value="coordinator"/>
+        <option id="taskLabelRight" value="name"/>
+        <option id="color.recent">
+            <![CDATA[#666600 #006666 #336600 #663300 #0000cc]]>
+        </option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="209" order="0"/>
+        <field id="1" name="Rôle par défaut" width="85" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="Tache A1: Mise en place depot git et du projet gantt" color="#0000cc" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-03-06" duration="4" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true">
+            <depend id="50" type="2" difference="0" hardness="Strong"/>
+            <task id="27" name="Mise en place du projet Git" color="#8cb6ce" meeting="false" start="2023-03-06" duration="1" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true">
+                <depend id="28" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="28" name="Création de la branche Lot A" color="#8cb6ce" meeting="false" start="2023-03-07" duration="1" complete="0" thirdDate="2023-03-07" thirdDate-constraint="0" expand="true">
+                <depend id="29" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="29" name="Création du projet Gantt" color="#8cb6ce" meeting="false" start="2023-03-08" duration="2" complete="0" thirdDate="2023-03-08" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="50" name="Codage des fichiers .h" meeting="false" start="2023-03-10" duration="4" complete="0" expand="true">
+            <depend id="65" type="2" difference="0" hardness="Strong"/>
+            <task id="52" name="Tâche A2 - codage de joueuses.h" color="#663300" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="2023-03-10" duration="2" complete="0" thirdDate="2023-03-01" thirdDate-constraint="0" expand="true"/>
+            <task id="53" name="Tâche A3 - personnages.h et zones.h" color="#336600" shape="0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1" meeting="false" start="2023-03-10" duration="4" complete="0" thirdDate="2023-02-27" thirdDate-constraint="0" expand="true">
+                <task id="54" name="Codage de zone.h" color="#8cb6ce" meeting="false" start="2023-03-10" duration="2" complete="0" thirdDate="2023-02-27" thirdDate-constraint="0" expand="true">
+                    <depend id="55" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="55" name="Codage de personnages.h" color="#8cb6ce" meeting="false" start="2023-03-14" duration="2" complete="0" thirdDate="2023-02-27" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="56" name="Tâche A4 - cartes.h et interface.h" color="#006666" shape="0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1" meeting="false" start="2023-03-10" duration="4" complete="0" thirdDate="2023-02-27" thirdDate-constraint="0" expand="true">
+                <task id="57" name="Codage de carte.h" color="#8cb6ce" meeting="false" start="2023-03-10" duration="2" complete="0" thirdDate="2023-02-27" thirdDate-constraint="0" expand="true">
+                    <depend id="58" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="58" name="Codage de interface.h" color="#8cb6ce" meeting="false" start="2023-03-14" duration="2" complete="0" thirdDate="2023-02-27" thirdDate-constraint="0" expand="true"/>
+            </task>
+        </task>
+        <task id="65" name="Codage de main.c" color="#666600" shape="1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0" meeting="false" start="2023-03-16" duration="3" complete="0" thirdDate="2023-03-14" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="1" name="Ian NGOUNE" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="2" name="Essodondadonatien Kao" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="3" name="Moustapha Mounir" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="4" name="Papealassane Ndiaye" function="SoftwareDevelopment:2" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="27" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="28" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="29" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="65" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="53" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="52" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="56" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
