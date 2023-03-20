@@ -9,7 +9,7 @@
     *   
 */
 
-typedef struct zone * zone;
+typedef struct zone zone;
 
 
 
@@ -42,15 +42,21 @@ typedef struct zones * zones;
     *@ensures retourne
 */
 
-zones createZones(int nb_zones);
+zones* createZones(int nb_zones);
 
 /*Libérer l'emplacepment mémoire alloué à un ensemble de zones (zones)*/
-void freeZones(zones zones);
+
+void freeZones(zones* zones);
 
 /*Récupérer une zone à partir de son numéro*/
-zone getZoneById(zones zones, int numZone);
+zone* getZoneById(zones* zones, int numZone);
+
+
+/*Fonction pour application les décisions des joueuses */
+void apply_decision(zones* zones,int capital);
 
 /*Fonction pour récupérer une zone successeur aléatoire d'une zone donnée*/
-zone getNextZone(zone zone);
+int getNextZone(zone* zone);
 
 #endif
+

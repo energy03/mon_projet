@@ -19,31 +19,31 @@ typedef enum Vie_Perso {VIVANT, MANGE} Vie_Perso;
     *   
     */
 
-typedef struct personnage *  personnage;
+typedef struct personnage personnage;
 
 /*  Creation de Personnage  */
 
 
 
-personnage createPerso(RolePerso V_ou_M,zone num);
+personnage* createPerso(RolePerso V_ou_M,zone* num);
 
 /*Fonction freePerso : Libération de la mémoire allouée pour la création du Personnage perso
  *  @requires   perso (type personnage)
  *  @assigns Libère la memoire allouée 
  *  @ensures
  */
-void freePerso(personnage perso);
+void freePerso(personnage* perso);
 
 /*Déplacer un Personnage
  *@requires un 
  */
-void movePerso(personnage perso, int zone_coord);
+void movePerso(personnage* perso,zone* zone_coord);
 
 /*Récuperer la zone*/
-zone getZonePerso(personnage perso);
+int getZonePerso(personnage* perso);
 
 /*Vérifier si un personnage est mangé ou pas*/
-void isEaten(personnage perso); 
+void isEaten(personnage* perso); 
 
 
 
