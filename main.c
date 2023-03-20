@@ -83,10 +83,12 @@ int main()
                     isEaten(membres_ecolE[i]);
                     i--;
                 }
-                // int montant_utilise = 1;
+
+                // décisions des joueuses
                 if (capital > 0) {
                     apply_decision(zones, capital);
                 }
+                
             }
             free(membres_ecolE);
         }
