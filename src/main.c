@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "joueuses.h"
-#include "personnages.h"
-#include "zones.h"
-#include "cartes.h"
-#include "interface.h"
+#include "../headers/joueuses.h"
+#include "../headers/personnages.h"
+#include "../headers/zones.h"
+#include "../headers/cartes.h"
+#include "../headers/interface.h"
 
 int main()
 {
