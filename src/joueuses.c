@@ -134,7 +134,9 @@ joueuse* joueuse_tour(joueuse* joueuse1, joueuse* joueuse2) {
     } else {
         (*joueuse1)->tour = 1;
         (*joueuse2)->tour = 0;
-        return joueuse2;
+        
+
+
     }
 }
 
@@ -157,7 +159,6 @@ int verifie_manges(joueuse* joueuse) {
         }
     }
     //Si tous les membres sont mangés, on renvoie 1, sinon on renvoie 0
-    int res = 0;
     if(cpt==0){
         res = 1;
     }
