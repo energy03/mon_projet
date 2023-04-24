@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2023-03-21" view-index="0" gantt-divider-location="388" resource-divider-location="300" version="3.0.2914" locale="fr_FR">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="195" order="0"/>
+        <field id="tpd4" name="Date de début" width="94" order="1"/>
+        <field id="tpd5" name="Date de fin" width="93" order="2"/>
+        <option id="taskLabelUp" value="taskDates"/>
+        <option id="taskLabelDown" value="length"/>
+        <option id="taskLabelLeft" value="coordinator"/>
+        <option id="taskLabelRight" value="name"/>
+        <option id="color.recent">
+            <![CDATA[#666600 #006666 #336600 #663300 #0000cc]]>
+        </option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="209" order="0"/>
+        <field id="1" name="Rôle par défaut" width="85" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="Tache B1:  Organisation du lot et makeﬁle et du projet gantt" color="#0000cc" shape="0,1,0,1,0,0,1,0,0,1,0,1,1,0,0,0" meeting="false" start="2023-03-22" duration="7" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true">
+            <depend id="87" type="2" difference="0" hardness="Strong"/>
+            <depend id="94" type="2" difference="0" hardness="Strong"/>
+            <task id="27" name="Création de la branche Lot B" color="#8cb6ce" meeting="false" start="2023-03-22" duration="1" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true">
+                <depend id="28" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="28" name="Création du ﬁchier makefile et des dossiers src, obj, bin" color="#8cb6ce" meeting="false" start="2023-03-23" duration="1" complete="0" thirdDate="2023-03-07" thirdDate-constraint="0" expand="true">
+                <depend id="70" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="70" name="Codage du makefile" color="#8cb6ce" meeting="false" start="2023-03-24" duration="3" complete="0" thirdDate="2023-03-07" thirdDate-constraint="0" expand="true" cost-manual-value="0.0" cost-calculated="true">
+                <depend id="29" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="29" name="Création du projet Gantt" color="#8cb6ce" meeting="false" start="2023-03-29" duration="2" complete="0" thirdDate="2023-03-08" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="87" name="Tâche B2 - Tests unitaires" color="#000000" meeting="false" start="2023-03-31" duration="3" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true">
+            <task id="92" name="Création de la branche Lot B test" color="#8cb6ce" meeting="false" start="2023-04-03" duration="1" complete="0" thirdDate="2023-03-14" thirdDate-constraint="0" expand="true"/>
+            <task id="125" name="Creation et codage de test.c" color="#8cb6ce" meeting="false" start="2023-03-31" duration="3" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="94" name="Tâche B3 - Structures de données" color="#8cb6ce" meeting="false" start="2023-03-31" duration="3" complete="0" thirdDate="2023-02-28" thirdDate-constraint="0" expand="true">
+            <depend id="101" type="2" difference="0" hardness="Strong"/>
+            <task id="98" name="Creation et codage de structures.h" color="#8cb6ce" meeting="false" start="2023-03-31" duration="1" complete="0" thirdDate="2023-02-23" thirdDate-constraint="0" expand="true">
+                <depend id="99" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="99" name="Creation et codage de structures.c" color="#8cb6ce" meeting="false" start="2023-04-03" duration="2" complete="0" thirdDate="2023-02-23" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="101" name="Tâche B4 - Constantes et variables globales" color="#000000" meeting="false" start="2023-04-05" duration="2" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true">
+            <depend id="102" type="2" difference="0" hardness="Strong"/>
+            <task id="112" name="mise en place des constantes et des variables globales contenant les différents paramètres du jeu" color="#8cb6ce" meeting="false" start="2023-04-05" duration="2" complete="0" thirdDate="2023-02-23" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="102" name="Tâche B5 - Types, getters et setters" color="#000000" meeting="false" start="2023-04-07" duration="4" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true">
+            <depend id="113" type="2" difference="0" hardness="Strong"/>
+            <task id="107" name="Implantation des type dans les.c" color="#8cb6ce" meeting="false" start="2023-04-07" duration="2" complete="0" thirdDate="2023-02-23" thirdDate-constraint="0" expand="true">
+                <depend id="108" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="108" name="Ajoute des fonctions utiles aux ﬁchiers .h" color="#8cb6ce" meeting="false" start="2023-04-11" duration="2" complete="0" thirdDate="2023-02-23" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="113" name="Tâche B6 - cartes.c, personnages.c, zones.c et joueuses.c" color="#000000" meeting="false" start="2023-04-13" duration="3" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true">
+            <depend id="116" type="2" difference="0" hardness="Strong"/>
+            <depend id="119" type="2" difference="0" hardness="Strong"/>
+            <task id="115" name="Implantation toutes les fonctions des ﬁchiers .c" color="#8cb6ce" meeting="false" start="2023-04-13" duration="3" complete="0" thirdDate="2023-03-13" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="116" name="Tâche B7 - Eﬀets des cartes" color="#8cb6ce" meeting="false" start="2023-04-18" duration="3" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true"/>
+        <task id="119" name="Tâche B8 - Interface" color="#8cb6ce" meeting="false" start="2023-04-18" duration="3" complete="0" thirdDate="2023-02-20" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="1" name="Ian NGOUNE" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="2" name="Essodondadonatien Kao" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="3" name="Moustapha Mounir" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="4" name="Papealassane Ndiaye" function="SoftwareDevelopment:2" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="27" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="28" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="29" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="70" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="0" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="87" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="92" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="125" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="101" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="112" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="102" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="107" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="108" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="94" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="98" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="99" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="116" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="119" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="113" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="115" resource-id="4" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
