@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "joueuses.h": "c",
+        "personnages.h": "c",
+        "zones.h": "c",
+        "cartes.h": "c",
+        "basic.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "constantes.h": "c"
+    }
+}

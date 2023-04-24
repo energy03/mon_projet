@@ -31,7 +31,7 @@ int main()
     int tour = 0; 
 
     // Zone de depart pour la joueuse
-    zone* zone_depart;
+    // zone* zone_depart;
 
     // Création de la zone du MONSTRE
     zone* zone_monstre =  getZoneById(zones, 1);
@@ -62,31 +62,31 @@ int main()
 
         // Déplacement du monstre
         zone_monstre = getZoneById(zones, getZonePerso(monstre));
-        int num_zone_arrivee_monstre = getNextZone(zone_monstre);
-        movePerso(monstre, getZoneById(zones, num_zone_arrivee_monstre));
+        // int num_zone_arrivee_monstre = getNextZone(zone_monstre);
+        // movePerso(monstre, getZoneById(zones, num_zone_arrivee_monstre));
 
         int nb_membres_ecole = nb_joueurs_ecoles(joueuse_courantE);
         if (nb_membres_ecole > 0) {
             // Déplacement des membres de l'école
             personnage** membres_ecolE = membres_joueurs(joueuse_courantE);
             for (int i = 0; i < nb_membres_ecole; i++) {
-                zone_depart = getZoneById(zones, getZonePerso(membres_ecolE[i]));
-                int num_zone_arrivee = getNextZone(zone_depart);
+                // zone_depart = getZoneById(zones, getZonePerso(membres_ecolE[i]));
+                // int num_zone_arrivee = getNextZone(zone_depart);
 
-                // Déplacement des personnages
-                movePerso(membres_ecolE[i], getZoneById(zones, num_zone_arrivee));
-                afficher_membre_deplacE(membres_ecolE[i]);
+                // // Déplacement des personnages
+                // movePerso(membres_ecolE[i], getZoneById(zones, num_zone_arrivee));
+                // afficher_membre_deplacE(membres_ecolE[i]);
 
                 // si le personage se depalce dans la zone du montre il est mangés
                 if (zone_monstre == getZoneById(zones, getZonePerso(membres_ecolE[i]))) {
-                    afficher_membre_mangE(membres_ecolE[i]);
+                    // afficher_membre_mangE(membres_ecolE[i]);
                     isEaten(membres_ecolE[i]);
                     i--;
                 }
 
                 // décisions des joueuses
                 if (capital > 0) {
-                    apply_decision(zones, capital);
+                    // apply_decision(zones, capital);
                 }
                 
             }
