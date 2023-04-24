@@ -5,7 +5,7 @@
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ * fin      TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************
@@ -19,6 +19,14 @@ struct zone {
 };
 
 /// getters
+
+/// @brief Récupérer le nombre de zones
+/// @param zones pointeur sur les zones
+/// @return nombre de zones
+int get_nb_zones(zones zones)
+{
+    return zones->nb_zones;
+}
 
 /// @brief recupération du nombre de personnages dans une zone
 /// @param zone pointeur sur la zone
@@ -54,10 +62,20 @@ void set_num_zone(zone* zon, int num)
     zon->num = num;
 }
 
+/// @brief modification du nombre de zones
+/// @param zones pointeur sur les zones
+/// @param nb_zones nouveau nombre de zones
+void set_nb_zones(zones* zones, int nb_zones)
+{
+    (*zones)->nb_zones = nb_zones;
+}
+
+
+
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ * fin      TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************

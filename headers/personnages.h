@@ -3,6 +3,8 @@
 
 #include "zones.h"
 
+typedef enum Filiere{FISE,FISA} Filiere;
+
 /*  Enumération FonctionPersonnage
     *   Permet de préciser si un personnage est un Monstre (MONSTRE)    ou un membre d'école (MEMBRE)
 */
@@ -43,22 +45,54 @@ void movePerso(personnage* perso,zone* zone_coord);
 int getZonePerso(personnage* perso);
 
 /*Vérifier si un personnage est mangé ou pas*/
-void isEaten(personnage* perso); 
+int isEaten(personnage* perso); 
 
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ *  debut     TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************
 */
 
+// getters
+/// @brief recuperation du role d'un personnage
+/// @param perso pointeur sur le personnage
+/// @return role du personnage
+RolePerso get_role_personnage(personnage* perso);
+
+/// @brief recuperation de la filière d'un personnage
+/// @param perso pointeur sur le personnage
+/// @return filière du personnage
+Filiere get_filiere_personnage(personnage* perso);
+
+/// @brief recuperation de la vie d'un personnage
+/// @param perso pointeur sur le personnage
+/// @return vie du personnage
+Vie_Perso get_vie_personnage(personnage* perso);
+
+// setters
+/// @brief modification du role d'un personnage
+/// @param perso pointeur sur le personnage
+/// @param role nouveau role du personnage
+void set_role_personnage(personnage* perso, RolePerso role);
+
+/// @brief modification de la filière d'un personnage
+/// @param perso pointeur sur le personnage
+/// @param filiere nouvelle filière du personnage
+void set_filiere_personnage(personnage* perso, Filiere filiere);
+
+/// @brief modification de la vie d'un personnage
+/// @param perso pointeur sur le personnage
+/// @param vie nouvelle vie du personnage
+void set_vie_personnage(personnage* perso, Vie_Perso vie);
+
 
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ *    fin   TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************

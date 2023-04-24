@@ -3,7 +3,7 @@
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ *    debut   TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************
@@ -12,12 +12,13 @@
 /// @brief enregistrement joueuses qui contient les informations sur une joueuse
 struct joueuse
 {
-    char* nom[20];
-    int capital;
-    int nb_membres;
-    personnage* membres[10];
-    int nb_cartes;
-    carte* cards[10];
+    char* nom[20]; // nom de la joueuse
+    int capital; // capital de la joueuse
+    int nb_membres; // nombre de membres de la joueuse
+    personnage* membres[10]; // tableau de pointeurs sur les personnages de la joueuse
+    int nb_cartes; // nombre de cartes de la joueuse
+    carte* cards[10]; // tableau de pointeurs sur les cartes de la joueuse
+    int tour;   // 1 si c'est le tour de la joueuse, 0 sinon
 };
 
 // getters
@@ -85,7 +86,7 @@ void set_nb_cartes_joueuse(joueuse player, int nb_cartes)
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ *    fin   TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************

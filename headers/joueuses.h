@@ -19,6 +19,7 @@ void creer_joueuses(joueuse* joueuse1, joueuse* joueuse2);
   ensures */
 
 void liberermemoire(joueuse* joueuse1, joueuse* joueuse2);
+
 //fonction qui indique la joueuse dont c'est le tour 
 /*@ requires  
   assigns *
@@ -52,7 +53,7 @@ void jouer_carte(joueuse* joueuse, carte* carte);
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ *     debut  TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************
@@ -117,7 +118,7 @@ void set_nb_cartes_joueuse(joueuse player, int nb_cartes);
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ *   fin    TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************

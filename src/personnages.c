@@ -7,19 +7,12 @@
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ *  debut     TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************
 */
 
-
-
-/// @brief creation d'un enumération Filière permettant de spécifier si un membre d'école est en FISE ou en FISA
-enum Filiere {FISE,FISA};
-
-/// @brief creation du type Filiere qui est un enumération Filière; une variable de type Filiere peut prendre les valeurs FISE ou FISA
-typedef enum Filiere Filiere;
 
 /// @brief enregistrement personnage qui contient les informations sur un personnage
 struct personnage{
@@ -29,6 +22,8 @@ struct personnage{
     Vie_Perso vie; // VIVANT ou MANGE s'il s'agit d'un personnage d'école
 };
 
+// getters
+
 /// @brief recuperation de la filière d'un personnage
 /// @param perso pointeur sur le personnage
 /// @return filière du personnage
@@ -37,10 +32,48 @@ Filiere get_filiere_personnage(personnage* perso){
 }
 
 
+/// @brief recuperation de la vie d'un personnage
+/// @param perso pointeur sur le personnage
+/// @return vie du personnage
+Vie_Perso get_vie_personnage(personnage* perso){
+    return perso->vie;
+}
+
+/// @brief recuperation du role d'un personnage
+/// @param perso pointeur sur le personnage
+/// @return role du personnage
+RolePerso get_role_personnage(personnage* perso){
+    return perso->role;
+}
+
+// setters
+/// @brief modification de la filière d'un personnage
+/// @param perso pointeur sur le personnage
+/// @param filiere nouvelle filière du personnage
+void set_filiere_personnage(personnage* perso, Filiere filiere){
+    perso->filiere = filiere;
+}
+
+/// @brief modification de la vie d'un personnage
+/// @param perso pointeur sur le personnage
+/// @param vie nouvelle vie du personnage
+void set_vie_personnage(personnage* perso, Vie_Perso vie){
+    perso->vie = vie;
+}
+
+/// @brief modification du role d'un personnage
+/// @param perso pointeur sur le personnage
+/// @param role nouveau role du personnage
+void set_role_personnage(personnage* perso, RolePerso role){
+    perso->role = role;
+}
+
+
+
 /**************************************************
  * ************************************************
  * ************************************************
- *    TACHE B5
+ * fin   TACHE B5
  * ************************************************
  * ************************************************
  * ************************************************
