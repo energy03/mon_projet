@@ -4,7 +4,7 @@
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ *     debut  TACHE B4
  * ***************************************
  * ***************************************
  * ***************************************
@@ -68,7 +68,59 @@ struct carte cartes[20]={
 /*****************************************
  * ***************************************
  * ***************************************
- *       TACHE B5
+ *    fin   TACHE B4
+ * ***************************************
+ * ***************************************
+ * ***************************************
+*/
+
+/*****************************************
+ * ***************************************
+ * ***************************************
+ *  debut     TACHE B5
+ * ***************************************
+ * ***************************************
+ * ***************************************
+*/
+
+// getters
+/// @brief retourne le nom de la carte
+/// @param carte la carte dont on veut le nom
+/// @return le nom de la carte
+char* get_nom_carte(struct carte carte){
+    return carte.nom;
+};
+
+/// @brief retourne la description de la carte
+/// @param carte la carte dont on veut la description
+/// @return la description de la carte
+char* get_description_carte(struct carte carte){
+    return carte.description;
+};
+
+/// @brief retourne l'id de la carte
+/// @param carte la carte dont on veut l'id
+/// @return l'id de la carte
+id_card get_id_carte(struct carte carte){
+    return carte.id;
+};
+
+/// @brief retourne la carte correspondant à l'id
+/// @param id l'id de la carte
+/// @return la carte correspondant à l'id
+struct carte get_carte(id_card id){
+    return cartes[id];
+};
+
+
+
+
+
+
+/*****************************************
+ * ***************************************
+ * ***************************************
+ *  fin     TACHE B5
  * ***************************************
  * ***************************************
  * ***************************************
