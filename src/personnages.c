@@ -1,4 +1,5 @@
 #include "../headers/personnages.h"
+#include <stdlib.h>
 
 
 
@@ -78,3 +79,49 @@ void set_role_personnage(personnage* perso, RolePerso role){
  * ************************************************
  * ************************************************
 */
+
+// Création d'un personnage (membre d'école ou monstre)
+personnage* createPerso(RolePerso Mo_Me, zone* num) {
+    personnage* newPerso = malloc(sizeof(personnage));
+    if (newPerso == NULL) {
+        return NULL;
+    }
+    newPerso->role = Mo_Me;
+    newPerso->filiere = (Mo_Me == MEMBRE) ? FISE : FISA; // À ajuster en fonction de la logique du jeu
+    newPerso->zone_perso = num;
+    newPerso->vie = VIVANT;
+
+    return newPerso;
+}
+
+// Libération de la mémoire allouée pour la création du personnage
+void freePerso(personnage* perso) {
+    if (perso != NULL) {
+        free(perso);
+    }
+}
+
+// Déplacer un personnage dans une zone
+void movePerso(personnage* perso, zone* zone_coord) {
+    if (perso != NULL) {
+        perso->zone_perso = zone_coord;
+    }
+}
+
+// Récupérer la zone dans laquelle se situe un personnage
+int getZonePerso(personnage* perso) {
+    if (perso != NULL && perso->zone_perso != NULL) {
+        return (perso->zone_perso->get_num_zone());
+    }
+    return -1;
+}
+
+// Indiquer à un membre d'école qu'il a été mangé
+void isEaten(personnage* perso) {
+    if (perso->etat == MANGE) {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
