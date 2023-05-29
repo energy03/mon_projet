@@ -3,7 +3,7 @@
 
 #include "zones.h"
 
-typedef enum Filiere{FISE,FISA} Filiere;
+typedef enum Filiere{FISA,FISE} Filiere;
 
 /*  Enumération FonctionPersonnage
     *   Permet de préciser si un personnage est un Monstre (MONSTRE)    ou un membre d'école (MEMBRE)
@@ -13,7 +13,7 @@ typedef enum RolePerso {MONSTRE, MEMBRE} RolePerso;
 /*  Enumeration Vie_Perso si un personnage est vivant ( VIVANT ) ou mangé ( MANGE )
 
 */
-typedef enum Vie_Perso {VIVANT, MANGE} Vie_Perso;
+typedef enum Vie_Perso {MANGE,VIVANT} Vie_Perso;
 
 /*
     *   type abstrait personnage (Pointeur sur un "structure personnage")
@@ -21,13 +21,13 @@ typedef enum Vie_Perso {VIVANT, MANGE} Vie_Perso;
     *   
     */
 
-typedef struct personnage personnage;
+typedef struct personnage * personnage;
 
 /*  Creation de Personnage  */
 
 
 
-personnage* createPerso(RolePerso V_ou_M,zone* num);
+personnage createPerso(RolePerso Mo_Me,char* nom,Filiere filiere);
 
 /*Fonction freePerso : Libération de la mémoire allouée pour la création du Personnage perso
  *  @requires   perso (type personnage)
@@ -39,13 +39,13 @@ void freePerso(personnage* perso);
 /*Déplacer un Personnage
  *@requires un 
  */
-void movePerso(personnage* perso,zone* zone_coord);
+void movePerso(personnage perso,int zone_coord);
 
 /*Récuperer la zone*/
-int getZonePerso(personnage* perso);
+int getZonePerso(personnage perso);
 
 /*Vérifier si un personnage est mangé ou pas*/
-int isEaten(personnage* perso); 
+int isEaten(personnage perso); 
 
 /*****************************************
  * ***************************************
@@ -57,36 +57,53 @@ int isEaten(personnage* perso);
 */
 
 // getters
+
+/// @brief recuperation du nom d'un personnage
+/// @param perso pointeur sur le personnage
+/// @return nom du personnage
+char* get_nom_personnage(personnage perso);
+
 /// @brief recuperation du role d'un personnage
 /// @param perso pointeur sur le personnage
 /// @return role du personnage
-RolePerso get_role_personnage(personnage* perso);
+RolePerso get_role_personnage(personnage perso);
 
 /// @brief recuperation de la filière d'un personnage
 /// @param perso pointeur sur le personnage
 /// @return filière du personnage
-Filiere get_filiere_personnage(personnage* perso);
+Filiere get_filiere_personnage(personnage perso);
 
 /// @brief recuperation de la vie d'un personnage
 /// @param perso pointeur sur le personnage
 /// @return vie du personnage
-Vie_Perso get_vie_personnage(personnage* perso);
+Vie_Perso get_vie_personnage(personnage perso);
+
+/// @brief recuperation de la zone d'un personnage
+/// @param perso pointeur sur le personnage
+/// @return zone du personnage
+int get_zone_personnage(personnage perso);
 
 // setters
 /// @brief modification du role d'un personnage
 /// @param perso pointeur sur le personnage
 /// @param role nouveau role du personnage
-void set_role_personnage(personnage* perso, RolePerso role);
+void set_role_personnage(personnage perso, RolePerso role);
 
 /// @brief modification de la filière d'un personnage
 /// @param perso pointeur sur le personnage
 /// @param filiere nouvelle filière du personnage
-void set_filiere_personnage(personnage* perso, Filiere filiere);
+void set_filiere_personnage(personnage perso, Filiere filiere);
 
 /// @brief modification de la vie d'un personnage
 /// @param perso pointeur sur le personnage
 /// @param vie nouvelle vie du personnage
-void set_vie_personnage(personnage* perso, Vie_Perso vie);
+void set_vie_personnage(personnage perso, Vie_Perso vie);
+
+/// @brief modification de la zone d'un personnage
+/// @param perso pointeur sur le personnage
+/// @param zone nouvelle zone du personnage
+void set_zone_personnage(personnage perso, int zone);
+
 
 
 /*****************************************

@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -g #-Werror
 LDFLAGS = -lcunit
 
 SRC_DIR = src
-SRC = joueuses.c personnages.c zones.c cartes.c interface.c test.c
+SRC = joueuses.c personnages.c zones.c cartes.c interface.c main.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC))
 
 OBJ_DIR = obj
@@ -16,7 +16,7 @@ all: $(EXEC)
 
 $(EXEC): $(OBJ)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $(EXEC) $(OBJ) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $(EXEC) $(OBJ)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)

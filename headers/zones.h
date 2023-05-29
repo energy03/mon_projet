@@ -9,7 +9,7 @@
     *    
 */
 
-typedef struct zone zone;
+typedef struct zone * zone;
 
 
 
@@ -23,7 +23,7 @@ typedef struct zone zone;
 
 struct zones
 {
-    zone * tabZones;
+    zone tabZones[10];
     double matriceProba[10][10];
     int nb_zones;
 };
@@ -44,21 +44,21 @@ typedef struct zones * zones;
     *@ensures retourne
 */
 
-zones* createZones(int nb_zones);
+zones createZones(int nb_zones);
 
 /*Libérer l'emplacepment mémoire alloué à un ensemble de zones (zones)*/
 
 void freeZones(zones* zones);
 
 /*Récupérer une zone à partir de son numéro*/
-zone* getZoneById(zones* zones, int numZone);
+zone getZoneById(zones zones, int numZone);
 
 
 /*Fonction pour application les décisions des joueuses */
-void apply_decision(zones* zones,int capital);
+void apply_decision(zones zones,int capital);
 
 /*Fonction pour récupérer une zone successeur aléatoire d'une zone donnée*/
-int getNextZone(zone* zone);
+int getNextZone(zone zone);
 
 /*****************************************
  * ***************************************
@@ -91,17 +91,17 @@ int get_num_zone(zone zon);
 /// @brief modification du nombre de personnages dans une zone
 /// @param zone pointeur sur la zone
 /// @param nb_perso nouveau nombre de personnages dans la zone
-void set_nb_perso_zone(zone* zon, int nb_perso);
+void set_nb_perso_zone(zone zon, int nb_perso);
 
 /// @brief modification du numéro d'une zone
 /// @param zone pointeur sur la zone
 /// @param num nouveau numéro de la zone
-void set_num_zone(zone* zon, int num);
+void set_num_zone(zone zon, int num);
 
 /// @brief modification du nombre de zones
 /// @param zones pointeur sur les zones
 /// @param nb_zones nouveau nombre de zones
-void set_nb_zones(zones* zones, int nb_zones);
+void set_nb_zones(zones zones, int nb_zones);
 
 
 

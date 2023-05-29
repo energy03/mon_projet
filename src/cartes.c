@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "../headers/cartes.h"
+#include "../headers/globals.h"
 
 /*****************************************
  * ***************************************
@@ -9,7 +12,7 @@
  * ***************************************
  * ***************************************
 */
-
+/*
 enum id_card{
     MAS_MER,    // id de la carte Massinissa Merabet 
     FET_BAN,    // id de la carte Fetia Bannour
@@ -31,16 +34,16 @@ enum id_card{
     MAR_SZA,    // id de la carte Marie Szafranski
     JUL_FOR,    // id de la carte Julien Forest
     LAU_PRE     // id de la carte Laurent Prevel
-};
-typedef enum id_card id_card;
+};*/
 
 struct carte
 {   
-    id_card id;
-    char* nom;
-    char* description;
+    int id;
+    char nom[41];
+    char description[400];
 };
 
+/*
 /// @brief variable globale contenant les cartes du jeu
 struct carte cartes[20]={
     {MAS_MER,"Massinissa Merabet" , "Augmente le capital de 2 pendant les 3 prochains tours"},
@@ -63,7 +66,7 @@ struct carte cartes[20]={
     {MAR_SZA,"Marie Szafranski",	"Ajoutez un monstre sur la zone 1, un membre de votre école sur la zone 2 et un membre de l'école adverse sur la zone 3. Si un membre d'école se trouve sur la même zone qu'un monstre, il n'est pas mangé."},
     {JUL_FOR,"Julien Forest",	"Mettez toutes les probabilités à 0. Puis, pour chaque zone, la probabilité de se déplacer de cette zone vers la zone contenant le monstre passe à 0.5 (s'il y a plusieurs monstres, un des monstres est choisi aléatoirement) ; et la probabilité de se déplacer de cette zone vers une autre zone ne contenant pas de monstre choisie aléatoirement passe également à 0.5."},
     {LAU_PRE,"Laurent Prével",	"Pendant 4 tours, les membres de votre école ne peuvent être mangés par un monstre. S'ils sont sur sa zone à la fin du tour, rien ne se passe, ils restent sur cette case."}
-};
+};*/
 
 /*****************************************
  * ***************************************
@@ -87,32 +90,50 @@ struct carte cartes[20]={
 /// @brief retourne le nom de la carte
 /// @param carte la carte dont on veut le nom
 /// @return le nom de la carte
-char* get_nom_carte(struct carte carte){
-    return carte.nom;
+char* get_nom_carte(carte carte){
+    return carte->nom;
 };
 
 /// @brief retourne la description de la carte
 /// @param carte la carte dont on veut la description
 /// @return la description de la carte
-char* get_description_carte(struct carte carte){
-    return carte.description;
+char* get_description_carte(carte carte){
+    return carte->description;
 };
 
 /// @brief retourne l'id de la carte
 /// @param carte la carte dont on veut l'id
 /// @return l'id de la carte
-id_card get_id_carte(struct carte carte){
-    return carte.id;
+int get_id_carte(carte carte){
+    return carte->id;
 };
 
 /// @brief retourne la carte correspondant à l'id
 /// @param id l'id de la carte
 /// @return la carte correspondant à l'id
-struct carte get_carte(id_card id){
-    return cartes[id];
+carte get_carte(int id){
+    return CARTES[id];
 };
 
 
+/// @brief crée une carte
+/// @param id l'id de la carte
+/// @param nom le nom de la carte
+/// @param description la description de la carte
+/// @return la carte créée
+carte createCarte(int id, char* nom, char* description){
+    carte c = malloc(sizeof(struct carte));
+    c->id = id;
+    strcpy(c->nom, nom);
+    strcpy(c->description, description);
+    return c;
+};
+
+/// @brief libère la mémoire allouée pour la carte
+/// @param carte la carte à libérer
+void freeCarte(carte* carte){
+    free(*carte);
+};
 
 
 

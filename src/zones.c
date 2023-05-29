@@ -17,7 +17,7 @@
 /// @brief enregistrement zone qui contient les informations sur une zone
 struct zone {
     int num;
-    personnage* perso[20]; // ensemble des personnages dans une zone
+    personnage perso[20]; // ensemble des personnages dans une zone
     int nb_perso; //nombre de personnages dans une zone
 };
 
@@ -31,20 +31,34 @@ int get_nb_zones(zones zones)
     return zones->nb_zones;
 }
 
+/// @brief recupération du nombre de la matrice de probabilité
+/// @param zones pointeur sur les zones
+/// @return matrice de probabilité
+double** get_matrice_proba(zones zones)
+{
+    double** matrice;
+    int nb_zn = get_nb_zones(zones);
+    matrice = malloc(nb_zn*sizeof(double*));
+    for(int i=0;i<nb_zn;i++){
+        matrice[i]=malloc(nb_zn*sizeof(double));
+    }
+    return matrice;
+}
+
 /// @brief recupération du nombre de personnages dans une zone
 /// @param zone pointeur sur la zone
 /// @return nombre de personnages dans la zone
 int get_nb_perso_zone(zone zon)
 {
-    return zon.nb_perso;
+    return zon->nb_perso;
 }
 
 /// @brief recupération du numéro d'une zone
 /// @param zone pointeur sur la zone
 /// @return numéro de la zone
-int get_num(zone zon)
+int get_num_zone(zone zon)
 {
-    return zon.num;
+    return zon->num;
 }
 
 /// setters
@@ -52,7 +66,7 @@ int get_num(zone zon)
 /// @brief modification du nombre de personnages dans une zone
 /// @param zone pointeur sur la zone
 /// @param nb_perso nouveau nombre de personnages dans la zone
-void set_nb_perso_zone(zone* zon, int nb_perso)
+void set_nb_perso_zone(zone zon, int nb_perso)
 {
     zon->nb_perso = nb_perso;
 }
@@ -60,7 +74,7 @@ void set_nb_perso_zone(zone* zon, int nb_perso)
 /// @brief modification du numéro d'une zone
 /// @param zone pointeur sur la zone
 /// @param num nouveau numéro de la zone
-void set_num(zone* zon, int num)
+void set_num_zone(zone zon, int num)
 {
     zon->num = num;
 }
@@ -68,10 +82,12 @@ void set_num(zone* zon, int num)
 /// @brief modification du nombre de zones
 /// @param zones pointeur sur les zones
 /// @param nb_zones nouveau nombre de zones
-void set_nb_zones(zones* zones, int nb_zones)
+void set_nb_zones(zones zones, int nb_zones)
 {
-    (*zones)->nb_zones = nb_zones;
+    zones->nb_zones = nb_zones;
 }
+
+
 
 
 
@@ -86,55 +102,18 @@ void set_nb_zones(zones* zones, int nb_zones)
 
 
 // Fonction pour créer une zone
-zones* createZones(int nb_zones){
-        double probabilities[10][10];
-        zones* zones_jeu = malloc(sizeof(zones));
-        (*zones_jeu)->nb_zones=nb_zones;
+zones createZones(int nb_zones){
+        zones zones_jeu = malloc(sizeof(struct zones));
+        set_nb_zones(zones_jeu, nb_zones);
         for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                        (*zones_jeu)->matriceProba[i][j] = probabilities[i][j];
-                }
+            for (int j = 0; j < 10; j++) {
+                zones_jeu->matriceProba[i][j] = 0.1;
+            }
+            zones_jeu->tabZones[i]=malloc(sizeof(struct zone));
+            set_num_zone(zones_jeu->tabZones[i], i+1);
+            set_nb_perso_zone(zones_jeu->tabZones[i], 0);
         }
-        zone* zone1 = malloc(sizeof(zone));
-        zone1->num=1;
-        zone1->nb_perso=0;
-        (*zones_jeu)->tabZones[0]= *zone1;
-        zone* zone2 = malloc(sizeof(zone));
-        zone2->num=2;
-        zone2->nb_perso=0;
-        (*zones_jeu)->tabZones[1]= *zone2;
-        zone* zone3 = malloc(sizeof(zone));
-        zone3->num=3;
-        zone3->nb_perso=0;
-        (*zones_jeu)->tabZones[2]= *zone3;
-        zone* zone4 = malloc(sizeof(zone));
-        zone4->num=4;
-        zone4->nb_perso=0;
-        (*zones_jeu)->tabZones[3]= *zone4;
-        zone* zone5 = malloc(sizeof(zone));
-        zone5->num=5;
-        zone5->nb_perso=0;
-        (*zones_jeu)->tabZones[4]= *zone5;
-        zone* zone6 = malloc(sizeof(zone));
-        zone6->num=6;
-        zone6->nb_perso=0;
-        (*zones_jeu)->tabZones[5]= *zone6;
-        zone* zone7 = malloc(sizeof(zone));
-        zone7->num=7;
-        zone7->nb_perso=0;
-        (*zones_jeu)->tabZones[6]= *zone7;
-        zone* zone8 = malloc(sizeof(zone));
-        zone8->num=8;
-        zone8->nb_perso=0;
-        (*zones_jeu)->tabZones[7]= *zone8;
-        zone* zone9 = malloc(sizeof(zone));
-        zone9->num=9;
-        zone9->nb_perso=0;
-        (*zones_jeu)->tabZones[8]= *zone9;
-        zone* zone10 = malloc(sizeof(zone));
-        zone10->num=10;
-        zone10->nb_perso=0;
-        (*zones_jeu)->tabZones[9]= *zone10;
+        
         return (zones_jeu);
 }
 
@@ -144,11 +123,38 @@ void freeZones(zones* zones) {
 }
 
 // Fonction pour récupérer une zone à partir de son numéro
-zone* getZoneById(zones* zones, int numZone) {
-    if (numZone >= 0 && numZone < (*zones)->nb_zones) {
-        return &((*zones)->tabZones[numZone+1]);
-    } else {
-        printf("Erreur: Numéro de zone invalide.\n");
-        exit(1);
+zone getZoneById(zones zones, int numZone) {
+    return zones->tabZones[numZone-1];
+    
+}
+
+// Simulation de loi uniforme
+double u(){
+    return (double)rand()/RAND_MAX;
+}
+
+//Simulation de la marche aléatoire
+int sim_dis(double p[], int x[]){
+    int l;
+    int j;
+    double h = u();
+    double s = 0;
+    for(j=0;j<10;j++){
+        s+=p[j];
+        if(h<=s){
+            l=x[j];
+            break;
+        }
+        
     }
+    return l;
+}
+
+
+// Fonction pour récupérer une zone successeur aléatoire d'une zone donnée
+int getNextZone(zone zone) {
+    int x[10] = {1,2,3,4,5,6,7,8,9,10};
+    double p[10] = {0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.05,0.05,0.1};
+    int l = sim_dis(p,x);
+    return l;
 }

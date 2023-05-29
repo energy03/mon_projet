@@ -1,6 +1,6 @@
 #include "../headers/personnages.h"
 #include <stdlib.h>
-
+#include <string.h>
 
 
 
@@ -17,18 +17,26 @@
 
 /// @brief enregistrement personnage qui contient les informations sur un personnage
 struct personnage{
+    char nom[41]; // nom du personnage
     RolePerso role; // MONSTRE ou MEMBRE
     Filiere filiere; // FISE ou FISA s'il s'agit d'un membre d'école
-    zone* zone_perso; // zone où se trouve le personnage
+    int zone_perso; // zone où se trouve le personnage
     Vie_Perso vie; // VIVANT ou MANGE s'il s'agit d'un personnage d'école
 };
 
 // getters
 
+/// @brief recuperation du nom d'un personnage
+/// @param perso pointeur sur le personnage
+/// @return nom du personnage
+char* get_nom_personnage(personnage perso){
+    return perso->nom;
+}
+
 /// @brief recuperation de la filière d'un personnage
 /// @param perso pointeur sur le personnage
 /// @return filière du personnage
-Filiere get_filiere_personnage(personnage* perso){
+Filiere get_filiere_personnage(personnage perso){
     return perso->filiere;
 }
 
@@ -36,38 +44,61 @@ Filiere get_filiere_personnage(personnage* perso){
 /// @brief recuperation de la vie d'un personnage
 /// @param perso pointeur sur le personnage
 /// @return vie du personnage
-Vie_Perso get_vie_personnage(personnage* perso){
+Vie_Perso get_vie_personnage(personnage perso){
     return perso->vie;
 }
 
 /// @brief recuperation du role d'un personnage
 /// @param perso pointeur sur le personnage
 /// @return role du personnage
-RolePerso get_role_personnage(personnage* perso){
+RolePerso get_role_personnage(personnage perso){
     return perso->role;
 }
 
+/// @brief recuperation de la zone d'un personnage
+/// @param perso pointeur sur le personnage
+/// @return zone du personnage
+int get_zone_personnage(personnage perso){
+    return perso->zone_perso;
+}
+
 // setters
+
+/// @brief modification du nom d'un personnage
+/// @param perso pointeur sur le personnage
+/// @param nom nouveau nom du personnage
+void set_nom_personnage(personnage perso, char* nom){
+    strcpy(perso->nom, nom);
+}
+
 /// @brief modification de la filière d'un personnage
 /// @param perso pointeur sur le personnage
 /// @param filiere nouvelle filière du personnage
-void set_filiere_personnage(personnage* perso, Filiere filiere){
+void set_filiere_personnage(personnage perso, Filiere filiere){
     perso->filiere = filiere;
 }
 
 /// @brief modification de la vie d'un personnage
 /// @param perso pointeur sur le personnage
 /// @param vie nouvelle vie du personnage
-void set_vie_personnage(personnage* perso, Vie_Perso vie){
+void set_vie_personnage(personnage perso, Vie_Perso vie){
     perso->vie = vie;
 }
 
 /// @brief modification du role d'un personnage
 /// @param perso pointeur sur le personnage
 /// @param role nouveau role du personnage
-void set_role_personnage(personnage* perso, RolePerso role){
+void set_role_personnage(personnage perso, RolePerso role){
     perso->role = role;
 }
+
+/// @brief modification de la zone d'un personnage
+/// @param perso pointeur sur le personnage
+/// @param zone nouvelle zone du personnage
+void set_zone_personnage(personnage perso, int zone){
+    perso->zone_perso = zone;
+}
+
 
 
 
@@ -81,48 +112,33 @@ void set_role_personnage(personnage* perso, RolePerso role){
 */
 
 // Création d'un personnage (membre d'école ou monstre)
-personnage* createPerso(RolePerso Mo_Me, zone* num) {
-    personnage* newPerso = malloc(sizeof(personnage));
-    if (newPerso == NULL) {
-        return NULL;
-    }
+personnage createPerso(RolePerso Mo_Me,char* nom,Filiere filiere) {
+    personnage newPerso = malloc(sizeof(struct personnage));
     newPerso->role = Mo_Me;
-    newPerso->filiere = (Mo_Me == MEMBRE) ? FISE : FISA; // À ajuster en fonction de la logique du jeu
-    newPerso->zone_perso = num;
+    newPerso->filiere = filiere; // À ajuster en fonction de la logique du jeu
     newPerso->vie = VIVANT;
+    strcpy(newPerso->nom, nom);
 
     return newPerso;
 }
 
 // Libération de la mémoire allouée pour la création du personnage
 void freePerso(personnage* perso) {
-    if (perso != NULL) {
-        free(perso);
-    }
+    free(*perso);
 }
 
 // Déplacer un personnage dans une zone
-void movePerso(personnage* perso, zone* zone_coord) {
-    if (perso != NULL) {
-        perso->zone_perso = zone_coord;
-    }
+/// @todo à compléter
+void movePerso(personnage perso, int zone_coord) {
+    
 }
 
 // Récupérer la zone dans laquelle se situe un personnage
-int getZonePerso(personnage* perso) {
-    if (perso != NULL && perso->zone_perso != NULL) {
-        return (getZonePerso(perso));
-    }
-    return -1;
-    return 0;
+int getZonePerso(personnage perso) {
+    return perso->zone_perso;
 }
 
 // Indiquer à un membre d'école qu'il a été mangé
-int isEaten(personnage* perso) {
-    if (perso->vie == MANGE) {
-        return 1;
-    }
-    else{
-        return 0;
-    }
+int isEaten(personnage perso) {
+    return perso->vie == MANGE;
 }
