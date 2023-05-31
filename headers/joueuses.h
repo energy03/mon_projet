@@ -48,7 +48,7 @@ void reinitialiser_capital(joueuse joueuse);
 void utiliser_capital(joueuse joueuse, int montant);
 
 // Fonction pour permettre à une joueuse de jouer une carte
-void jouer_carte(joueuse joueuse, carte carte);
+void jouer_carte(joueuse joueuse, int carte);
 
 /*****************************************
  * ***************************************

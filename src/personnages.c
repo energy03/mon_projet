@@ -1,6 +1,9 @@
-#include "../headers/personnages.h"
 #include <stdlib.h>
 #include <string.h>
+#include "../headers/personnages.h"
+#include "../headers/zones.h"
+#include "../headers/globals.h"
+#include "../headers/structures.h"
 
 
 
@@ -130,7 +133,17 @@ void freePerso(personnage* perso) {
 // Déplacer un personnage dans une zone
 /// @todo à compléter
 void movePerso(personnage perso, int zone_coord) {
-    
+    zone anc_zone = getZoneById(ZONES, perso->zone_perso);
+    zone nouv_zone = getZoneById(ZONES, zone_coord);
+    int nb_perso_anc_zone = get_nb_perso_zone(anc_zone);
+    int nb_perso_nouv_zone = get_nb_perso_zone(nouv_zone);
+    personnage * tab_pers=get_tab_perso_zone(anc_zone);
+    remove_element((void**)tab_pers ,(void*)perso, &nb_perso_anc_zone);
+    set_nb_perso_zone(anc_zone, nb_perso_anc_zone);
+    personnage * tab_pers_1= get_tab_perso_zone(nouv_zone);
+    add_element((void**)tab_pers_1 , (void*)perso , &nb_perso_nouv_zone);
+    perso->zone_perso = zone_coord;
+    set_nb_perso_zone(nouv_zone, nb_perso_nouv_zone);
 }
 
 // Récupérer la zone dans laquelle se situe un personnage

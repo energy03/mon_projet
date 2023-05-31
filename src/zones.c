@@ -1,9 +1,11 @@
-#include "../headers/zones.h"
-#include "../headers/personnages.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
 #include <stdlib.h>
+#include "../headers/personnages.h"
+#include "../headers/zones.h"
+#include "../headers/globals.h"
+#include "../headers/structures.h"
 
 /*****************************************
  * ***************************************
@@ -41,6 +43,9 @@ double** get_matrice_proba(zones zones)
     matrice = malloc(nb_zn*sizeof(double*));
     for(int i=0;i<nb_zn;i++){
         matrice[i]=malloc(nb_zn*sizeof(double));
+        for(int j=0;j<nb_zn;j++){
+            matrice[i][j]=zones->matriceProba[i][j];
+        }
     }
     return matrice;
 }
@@ -59,6 +64,14 @@ int get_nb_perso_zone(zone zon)
 int get_num_zone(zone zon)
 {
     return zon->num;
+}
+
+/// @brief recupération du tableau de personnages d'une zone
+/// @param zone pointeur sur la zone
+/// @return tableau de personnages de la zone
+personnage* get_tab_perso_zone(zone zon)
+{
+    return zon->perso;
 }
 
 /// setters
@@ -87,6 +100,17 @@ void set_nb_zones(zones zones, int nb_zones)
     zones->nb_zones = nb_zones;
 }
 
+/// @brief modification du tableau de personnages d'une zone
+/// @param zone pointeur sur la zone
+/// @param tab_perso nouveau tableau de personnages de la zone
+/// @param nb_perso nouveau nombre de personnages dans la zone
+void set_tab_perso_zone(zone zon, personnage* tab_perso, int nb_perso)
+{
+    for(int i=0;i<nb_perso;i++){
+        zon->perso[i]=tab_perso[i];
+    }
+    zon->nb_perso = nb_perso;
+}
 
 
 
@@ -119,7 +143,11 @@ zones createZones(int nb_zones){
 
 // Fonction pour libérer la mémoire allouée lors de la création des zones
 void freeZones(zones* zones) {
-    free(zones);
+    for(int i=0;i<get_nb_zones(*zones);i++){
+        
+        free((*zones)->tabZones[i]);
+    }
+    free(*zones);
 }
 
 // Fonction pour récupérer une zone à partir de son numéro
@@ -134,27 +162,30 @@ double u(){
 }
 
 //Simulation de la marche aléatoire
-int sim_dis(double p[], int x[]){
-    int l;
-    int j;
-    double h = u();
-    double s = 0;
-    for(j=0;j<10;j++){
-        s+=p[j];
-        if(h<=s){
+int sim_dis(double p[], int x[], int n){
+    double h=u();
+    int l=x[n-1];
+    // Étape 2: Trouver le premier indice j* tel que u ≤ Σpi pour i=1 à j*
+    double somme=0;
+    for(int j=0;j<n;j++){
+        somme+=p[j];
+        if(h<=somme && p[j]!=0){
             l=x[j];
             break;
         }
-        
     }
     return l;
+    
 }
 
 
 // Fonction pour récupérer une zone successeur aléatoire d'une zone donnée
 int getNextZone(zone zone) {
+    int zn;
+    zn= get_num_zone(zone);
     int x[10] = {1,2,3,4,5,6,7,8,9,10};
-    double p[10] = {0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.05,0.05,0.1};
-    int l = sim_dis(p,x);
+    double** matrice=get_matrice_proba(ZONES);
+    int l = sim_dis(matrice[zn-1],x,10);
+    free_matrice(&matrice,10);
     return l;
 }

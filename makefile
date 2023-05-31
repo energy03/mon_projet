@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -g #-Werror
 LDFLAGS = -lcunit
 
 SRC_DIR = src
-SRC = joueuses.c personnages.c zones.c cartes.c interface.c main.c
+SRC = structures.c joueuses.c personnages.c zones.c cartes.c interface.c main.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC))
 
 OBJ_DIR = obj

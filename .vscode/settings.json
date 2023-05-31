@@ -7,6 +7,7 @@
         "basic.h": "c",
         "stdio.h": "c",
         "stdlib.h": "c",
-        "constantes.h": "c"
+        "constantes.h": "c",
+        "cmath": "c"
     }
 }

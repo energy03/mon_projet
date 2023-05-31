@@ -1,140 +1,85 @@
-// Inclusion des entêtes
-#include "structures.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+// Inclusion des entêtes
+#include "../headers/structures.h"
 
-// Définition des structures internes
 
-typedef struct ListeCartes {
-    CarteStruct *cartes;
-    int nombre;
-    int capacite;
-} ListeCartes;
 
-// Définition de la structure MatriceProbabilites
-typedef struct MatriceProbabilites {
-    int lignes;      // Nombre de lignes de la matrice
-    int colonnes;    // Nombre de colonnes de la matrice
-    double **matrice; // Pointeur vers la matrice de probabilités
-} MatriceProbabilites;
+// tableau de void*
 
-ListeCartes *creer_liste_cartes() {
-    ListeCartes *liste = (ListeCartes *)malloc(sizeof(ListeCartes));
-    liste->nombre = 0;
-    liste->capacite = 10;
-
-    liste->cartes = (CarteStruct *)malloc(10 * sizeof(CarteStruct));
-
-    return liste;
+/// @brief fonction pour ajouter un élément dans un tableau de void*
+/// @param tab tableau de void*
+/// @param element void* à ajouter
+/// @param *size taille du tableau
+void add_element(E tab[], E element, int *size)
+{
+    tab[*size] = element;
+    (*size)++;
 }
 
-
-void supprimer_liste_cartes(ListeCartes *liste) {
-    free(liste->cartes);
-    free(liste);
-}
-
-void ajouter_carte(ListeCartes *liste, CarteStruct carte) {
-    if (liste->nombre == liste->capacite) {
-        liste->capacite *= 2;
-        liste->cartes = (CarteStruct *)realloc(liste->cartes, liste->capacite * sizeof(CarteStruct));
-    }
-    liste->cartes[liste->nombre++] = carte;
-}
-
-void retirer_carte(ListeCartes *liste, int index) {
-    for (int i = index; i < liste->nombre - 1; ++i) {
-        liste->cartes[i] = liste->cartes[i + 1];
-    }
-    liste->nombre--;
-}
-
-CarteStruct obtenir_carte(const ListeCartes *liste, int index) {
-    return liste->cartes[index];
-}
-// Créer une nouvelle MatriceProbabilites
-MatriceProbabilites *creer_matrice_probabilites(int lignes, int colonnes) {
-    MatriceProbabilites *matrice_probabilites = (MatriceProbabilites *)malloc(sizeof(MatriceProbabilites));
-    matrice_probabilites->lignes = lignes;
-    matrice_probabilites->colonnes = colonnes;
-    matrice_probabilites->matrice = (double **)malloc(lignes * sizeof(double *));
-    for (int i = 0; i < lignes; i++) {
-        matrice_probabilites->matrice[i] = (double *)calloc(colonnes, sizeof(double));
-    }
-    return matrice_probabilites;
-}
-
-// Supprimer la MatriceProbabilites et libérer la mémoire
-void supprimer_matrice_probabilites(MatriceProbabilites *matrice_probabilites) {
-    for (int i = 0; i < matrice_probabilites->lignes; i++) {
-        free(matrice_probabilites->matrice[i]);
-    }
-    free(matrice_probabilites->matrice);
-    free(matrice_probabilites);
-}
-
-// Définir la valeur d'une cellule de la MatriceProbabilites
-void definir_valeur_matrice_probabilites(MatriceProbabilites *matrice_probabilites, int ligne, int colonne, double valeur) {
-    if (ligne >= 0 && ligne < matrice_probabilites->lignes && colonne >= 0 && colonne < matrice_probabilites->colonnes) {
-        matrice_probabilites->matrice[ligne][colonne] = valeur;
-    }
-}
-
-// Obtenir la valeur d'une cellule de la MatriceProbabilites
-double obtenir_valeur_matrice_probabilites(const MatriceProbabilites *matrice_probabilites, int ligne, int colonne) {
-    if (ligne >= 0 && ligne < matrice_probabilites->lignes && colonne >= 0 && colonne < matrice_probabilites->colonnes) {
-        return matrice_probabilites->matrice[ligne][colonne];
-    }
-    return -1.0;
-}
-
-int main() {
-    // Création de la liste de cartes
-    ListeCartes *liste = creer_liste_cartes();
-    CarteStruct carte1 = {1, "Coeur"};
-    CarteStruct carte2 = {2, "Pique"};
-
-    ajouter_carte(liste, carte1);
-    ajouter_carte(liste, carte2);
-
-    for (int i = 0; i < liste->nombre; i++) {
-        CarteStruct carte = obtenir_carte(liste, i);
-        printf("Carte %d: %d de %s\n", i + 1, carte.valeur, carte.couleur);
+/// @brief fonction pour supprimer un élément dans un tableau de void*
+/// @param tab tableau de void*
+/// @param element void* à supprimer
+/// @param *size taille du tableau
+void remove_element(E tab[],E element, int *size)
+{   
+     if (tab == NULL || *size == 0) {
+        return; // Ne rien faire si le tableau est nul ou vide
     }
 
-    supprimer_liste_cartes(liste);
+    int i, j;
 
-    // Création de la matrice de probabilités
-    int lignes = 3;
-    int colonnes = 3;
-    MatriceProbabilites *matrice_probabilites = creer_matrice_probabilites(lignes, colonnes);
+    // Parcourir le tableau pour trouver l'élément à supprimer
+    for (i = 0; i < *size; i++) {
+        if (tab[i] == element) {
+            // Décaler tous les éléments suivants vers la gauche
+            for (j = i; j < *size - 1; j++) {
+                tab[j] = tab[j + 1];
+            }
 
-    // Remplissage de la matrice de probabilités avec des valeurs aléatoires
-    srand(time(NULL));
-    for (int i = 0; i < lignes; i++) {
-        for (int j = 0; j < colonnes; j++) {
-            double valeur = (double)rand() / RAND_MAX;
-            definir_valeur_matrice_probabilites(matrice_probabilites, i, j, valeur);
+            // Libérer la mémoire de l'élément supprimé
+            tab[*size - 1]=NULL;
+
+            // Réduire la taille du tableau
+            (*size)--;
+
+            // Sortir de la boucle
+            break;
         }
     }
-
-    // Affichage de la matrice de probabilités
-    printf("Matrice de probabilités :\n");
-    for (int i = 0; i < lignes; i++) {
-        for (int j = 0; j < colonnes; j++) {
-            double valeur = obtenir_valeur_matrice_probabilites(matrice_probabilites, i, j);
-            printf("%.2f ", valeur);
-        }
-        printf("\n");
+    /*// Parcours du tableau jusqu'a tomber sur l'élément à supprimer
+    if(*size == 1){
+        tab[0] = NULL;
     }
-
-    // Suppression de la matrice de probabilités
-    supprimer_matrice_probabilites(matrice_probabilites);
-
-    return 0;
+    else if(*size > 1){
+        int index=0;
+        while(tab[index] != element && index < *size)
+        {
+            index++;
+        }
+        if(index!=*size-1){
+            // Decalage des éléments du tableau
+            for(int i = index; i < *size; i++)
+            {
+                tab[i] = tab[i+1];
+            }
+            
+        }
+        tab[*size-1] = NULL;
+    }*/
+    
 }
 
 
-
+/// @brief fonction liberant memoire allouée à une matrice
+/// @param matrice matrice à libérer
+/// @param nb_lignes nombre de lignes de la matrice
+void free_matrice(double*** matrice, int nb_lignes)
+{
+    for(int i=0;i<nb_lignes;i++){
+        free((*matrice)[i]);
+    }
+    free(*matrice);
+}

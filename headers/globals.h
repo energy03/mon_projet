@@ -71,6 +71,8 @@ extern carte MARIE_SZAFRANSKI;   // carte Marie Szafranski
 extern carte JULIEN_FOREST;      // carte Julien Forest
 extern carte LAURENT_PREVEL;     // carte Laurent Prevel
 
+extern int TOUR;  // Si impair alors c'est le tour de la joueuse 1, sinon c'est le tour de la joueuse 2
+
 
 
 

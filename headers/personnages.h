@@ -1,8 +1,6 @@
 #ifndef PERSONNAGES_H
 #define PERSONNAGES_H
 
-#include "zones.h"
-
 typedef enum Filiere{FISA,FISE} Filiere;
 
 /*  Enumération FonctionPersonnage

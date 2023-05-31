@@ -1,5 +1,6 @@
 #include "../headers/joueuses.h"
 #include "../headers/constantes.h"
+#include "../headers/globals.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -167,17 +168,17 @@ void creer_joueuses(joueuse* joueuse1, joueuse* joueuse2) {
     // Initialisation des attributs des joueuses
     (*joueuse1)->capital = CAPITAL_DEBUT_TOUR;
     // (*joueuse1)->nom = NULL;
-    (*joueuse1)->nb_membres = NB_MEMBRES_PAR_JOUEUSE;
+    (*joueuse1)->nb_membres = 0;
     // (*joueuse1)->membres = NULL;
-    (*joueuse1)->nb_cartes = NB_CARTES_MAIN_DEBUT;
+    (*joueuse1)->nb_cartes = 0;
     // (*joueuse1)->cards = NULL;
     (*joueuse1)->tour = 0;
     
     (*joueuse2)->capital = CAPITAL_DEBUT_TOUR;
     // (*joueuse2)->nom = NULL;
-    (*joueuse2)->nb_membres = NB_MEMBRES_PAR_JOUEUSE;
+    (*joueuse2)->nb_membres = 0;
     // (*joueuse2)->membres = NULL;
-    (*joueuse2)->nb_cartes = NB_CARTES_MAIN_DEBUT;
+    (*joueuse2)->nb_cartes = 0;
     // (*joueuse2)->cards = NULL;
     (*joueuse2)->tour = 0;
 }
@@ -190,9 +191,7 @@ void liberermemoire(joueuse* joueuse1, joueuse* joueuse2) {
 
 /// @todo Fonction qui indique la joueuse dont c'est le tour
 joueuse joueuse_tour(joueuse joueuse1, joueuse joueuse2) {
-    // Implémentation dépendante de la manière dont le tour est déterminé
-    // Exemple : si un booléen 'tour' est présent dans la structure joueuse
-    return joueuse1;
+    return TOUR%2 == 1 ? joueuse1 : joueuse2;
 }
 
 // Fonction qui renvoie l'ensemble des membres de l'école d'une joueuse
@@ -207,12 +206,19 @@ int nb_joueurs_ecoles(joueuse j) {
 
 // Fonction qui vérifie si tous les membres d'école d'une joueuse ont été mangés
 int verifie_manges(joueuse joueuse) {
-    return 0;
+    int nb_manges = 0;
+    int nb_membres = joueuse->nb_membres;
+    for (int i = 0; i < nb_membres; i++) {
+        if (isEaten(joueuse->membres[i])) {
+            nb_manges++;
+        }
+    }
+    return nb_manges == nb_membres;
 }
 
 // Fonction pour réinitialiser le capital d'une joueuse
 void reinitialiser_capital(joueuse joueuse) {
-    joueuse->capital = 0;
+    joueuse->capital = 5;
 }
 
 // Fonction pour utiliser un certain montant du capital d'une joueuse
@@ -221,7 +227,16 @@ void utiliser_capital(joueuse joueuse, int montant) {
 }
 
 // Fonction pour permettre à une joueuse de jouer une carte
-void jouer_carte(joueuse joueuse, carte carte) {
+void jouer_carte(joueuse joueuse, int carte) {
+    printf("Joueuse %s joue carte %d\n", joueuse->nom, carte);
+    switch (carte)
+    {
+    case 1:
+        break;
+    
+    default:
+        break;
+    }
     // On utilise un index pour savoir quelle carte est jouée
     
 }

@@ -43,5 +43,19 @@ Fonction pour afficher si un membre a été déplacé
 */
 void afficher_membre_deplace(personnage personnage);
 
+/// @brief initialisation de l'interface
+void init_interface();
+
+/// @brief liberation de l'interface
+void free_interface();
+
+/// @brief déplacement des personnages et des monstres
+void deplacement();
+
+/// @brief appliquer les effets des deplacements
+// Les personages qui sont dans la meme zone que les monstres sont mangés
+// Le tableau des personnages de la zone est mis à jour : la première case du tableau est occupée par le monstre et les autres cases sont mises à NULL
+void apply_effet_deplacement();
+
 
 #endif
