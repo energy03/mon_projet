@@ -84,6 +84,8 @@ int main()
     while(!verifie_manges(JOUEUSE_1) && !verifie_manges(JOUEUSE_2)){
         int choix;
         TOUR++;
+        joueuse j_courente;
+        j_courente = joueuse_tour(JOUEUSE_1,JOUEUSE_2);
         printf("******************Tour %d ******************\n",TOUR);
         // Affichage des informations du jeu
         afficher_informations();
@@ -99,8 +101,29 @@ int main()
             switch (choix){
 
                 case 1:
+                    printf("Vous avez choisi d'utiliser votre capital\n");
+                    printf("Votre capital actuel est de %d\n",get_capital_joueuse(j_courente));
+                    int capital = demander_capital_joueuse(j_courente);
+                    if(capital == -1){
+                        printf("Saisie invalide\n");
+                        break;
+                    }
+                    utiliser_capital(j_courente,capital);
+                    printf("Je vais vous demander de choisir un trois zones\n");
+                    int zn[3];
+                    for(int i=0;i<3;i++){
+                        printf("Etape %d : Choisissez zone\n",i+1);
+                        zn[i] = demander_zone_joueuse(j_courente);
+                        if(zn[i] == -1){
+                            printf("Saisie invalide\n");
+                            break;
+                        }
+                    }
+                    apply_decision(ZONES,capital,zn[0],zn[1],zn[2]);
                     break;
                 case 2:
+                    printf("Vous avez choisi d'utiliser une carte\n");
+                    demander_carte_joueuse(j_courente);
                     break;
                 case 3:
                     

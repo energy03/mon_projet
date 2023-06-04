@@ -23,7 +23,7 @@ struct joueuse
     int nb_membres; // nombre de membres de la joueuse
     personnage membres[10]; // tableau de pointeurs sur les personnages de la joueuse
     int nb_cartes; // nombre de cartes de la joueuse
-    int cards[10]; // tableau des id des cartes des joueuses
+    carte cards[10]; // tableau des cartes des joueuses
     int tour;   // 1 si c'est le tour de la joueuse, 0 sinon
 };
 
@@ -73,7 +73,7 @@ personnage* get_membres_joueuse(joueuse player)
 /// @brief recupération du tableau des cartes d'une joueuse
 /// @param player pointeur sur la joueuse
 /// @return tableau des cartes de la joueuse
-int* get_cartes_joueuse(joueuse player)
+carte* get_cartes_joueuse(joueuse player)
 {
     return player->cards;
 }
@@ -130,17 +130,19 @@ void set_membres_joueuse(joueuse player, personnage* membres,int nb_membres)
     {
         player->membres[i] = membres[i];
     }
+    set_nb_membres_joueuse(player,nb_membres);
 }
 
 /// @brief modification du tableau des cartes d'une joueuse
 /// @param player pointeur sur la joueuse
 /// @param cartes nouveau tableau des cartes de la joueuse
-void set_cartes_joueuse(joueuse player, int* cartes,int nb_cartes)
+void set_cartes_joueuse(joueuse player, carte* cartes,int nb_cartes)
 {
     for (int i = 0; i < nb_cartes; i++)
     {
         player->cards[i] = cartes[i];
     }
+    set_nb_cartes_joueuse(player,nb_cartes);
 }
 
 /// @brief modification du tour d'une joueuse
@@ -173,6 +175,7 @@ void creer_joueuses(joueuse* joueuse1, joueuse* joueuse2) {
     (*joueuse1)->nb_cartes = 0;
     // (*joueuse1)->cards = NULL;
     (*joueuse1)->tour = 0;
+    set_nom_joueuse(*joueuse1,"Joueuse 1");
     
     (*joueuse2)->capital = CAPITAL_DEBUT_TOUR;
     // (*joueuse2)->nom = NULL;
@@ -181,6 +184,7 @@ void creer_joueuses(joueuse* joueuse1, joueuse* joueuse2) {
     (*joueuse2)->nb_cartes = 0;
     // (*joueuse2)->cards = NULL;
     (*joueuse2)->tour = 0;
+    set_nom_joueuse(*joueuse2,"Joueuse 2");
 }
 
 // Fonction pour libérer la mémoire allouée lors de la création des joueuses

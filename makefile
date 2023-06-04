@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g #-Werror
+CFLAGS = -Wall -Wextra -Werror -g -std=c99
 LDFLAGS = -lcunit
 
 SRC_DIR = src

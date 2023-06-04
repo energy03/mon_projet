@@ -2,12 +2,24 @@
 #include "../headers/interface.h"
 #include "../headers/globals.h"
 #include "../headers/constantes.h"
+#include "../headers/structures.h"
 #include <stdlib.h>
 #include <time.h>
 
 // Fonction pour afficher toutes les informations du jeu
 void afficher_informations() {
     printf("******************TOUR%d ******************\n",TOUR);
+
+    // Matrice de probabilité
+    printf("******************Matrice de probabilité ******************\n");
+    double** matrice_proba=get_matrice_proba(ZONES);
+    for(int i=0;i<get_nb_zones(ZONES);i++){
+        for(int j=0;j<get_nb_zones(ZONES);j++){
+            printf("%4.1f ",matrice_proba[i][j]);
+        }
+        printf("\n");
+    }
+    free_matrice(&matrice_proba,get_nb_zones(ZONES));
     // affichage des membres présents dans chaque zone
     for(int i=0;i<get_nb_zones(ZONES);i++){
         printf("******************zone %d ******************\n",i+1);
@@ -25,47 +37,48 @@ void afficher_informations() {
 
 // Fonction pour demander à une joueuse combien de capital elle veut utiliser
 int demander_capital_joueuse(joueuse joueuse) {
-    
-    return 0;
+    int capital_joueuse = get_capital_joueuse(joueuse);
+    printf("Choisissez un capital entre 0 et %d : \n", capital_joueuse);
+    int capital;
+    printf(">>> ");
+    scanf("%d",&capital);
+    if(capital<0 || capital>capital_joueuse){
+        printf("Capital invalide\n");
+        return -1;
+    }
+    return capital;
 }
 
 // Fonction pour demander à une joueuse une zone
-int demander_zone_joueuse(joueuse joueuse) {
-   
-    return 0;
+int demander_zone_joueuse(joueuse joueuse) 
+{
+    printf("%s , choisissez un numero de zone entre 1 et 10 : \n",get_nom_joueuse(joueuse));
+    int zone;
+    printf(">>> ");
+    scanf("%d",&zone);
+    if(zone<1 || zone>10){
+        printf("Zone invalide\n");
+        return -1;
+    }
+    return zone;
 }
 
 // Fonction pour demander à une joueuse si elle veut jouer une carte et si oui, laquelle
-carte demander_carte_joueuse(joueuse joueuse, int tour_joueuse) {
-    /*int choix;
-    int numJoueuse;
-    if(tour_joueuse %2 != 0){
-        numJoueuse = 2;
-    }else{
-        numJoueuse = 1;
+carte demander_carte_joueuse(joueuse joueuse) {
+    printf("%s , choisir une carte à jouer parmi : \n",get_nom_joueuse(joueuse));
+    carte* cartes_joueuse = get_cartes_joueuse(joueuse);
+    int nb_cartes_joueuse = get_nb_cartes_joueuse(joueuse);
+    for(int i=0;i<nb_cartes_joueuse;i++){
+        printf("\t %d: %s\n",get_id_carte(cartes_joueuse[i]),get_nom_carte(cartes_joueuse[i]));
     }
-    printf("%d\n", nb_joueurs_ecoles(joueuse));
-    printf("Joueur %d, voulez-vous jouer une carte ? (1: Oui, 0: Non)\n",numJoueuse);
-    scanf("%d", &choix);
-
-    if (choix == 1) {
-        int index_carte;
-        printf("Quelle carte voulez-vous jouer ? (Indiquez l'index de la carte)\n");
-        scanf("%d", &index_carte);
-
-        // Vérifiez si l'index est valide et récupérez la carte correspondante
-        // if (index_carte >= 0 && index_carte < (*joueuse)->nb_cartes) {
-        //     return (*joueuse)->cards[index_carte];
-        // } else {
-        //     printf("L'index de la carte est invalide.\n");
-        //     return NULL;
-        // }
-        carte* c = NULL;
-        return c;
-    } else {
+    int id_carte;
+    printf(">>> ");
+    scanf("%d",&id_carte);
+    if(id_carte<0 || id_carte>nb_cartes_joueuse){
+        printf("Carte invalide\n");
         return NULL;
-    }*/
-    return NULL;
+    }
+    return get_carte(id_carte);
 }
 
 // Fonction pour afficher un message quand le jeu est fini
@@ -76,7 +89,7 @@ void afficher_fin_jeu() {
 // Fonction pour afficher si un membre a été mangé
 void afficher_membre_mange(personnage personnage) {
     // if(personnage->vie == MANGE){
-        printf("Le membre %d a été mangé.\n", getZonePerso(personnage));
+        printf("%s a été mangé dans la zone %d.\n", get_nom_personnage(personnage),get_zone_personnage(personnage));
     // }
     // else{
     //     printf("Le membre %s est en vie.\n", personnage->nom);
@@ -178,6 +191,38 @@ void init_interface() {
     reinitialiser_capital(JOUEUSE_1);
     reinitialiser_capital(JOUEUSE_2);
 
+    // choix des cartes des joueuses
+    set_nb_cartes_joueuse(JOUEUSE_1, NB_CARTES_MAIN_DEBUT);
+    for(int i=0;i<NB_CARTES_MAIN_DEBUT;i++){
+        int alea = rand() % 20;
+        carte carte_alea=get_carte(alea);
+        carte* cartes_joueuse=get_cartes_joueuse(JOUEUSE_1);
+        
+        // tant que la carte est déjà dans la main de la joueuse 1, on tire une autre carte
+        while(is_in((void**)cartes_joueuse,(void*)carte_alea,i)){
+            alea = rand() % 20;
+            carte_alea=get_carte(alea);
+        }
+        cartes_joueuse[i]=carte_alea;
+    }
+
+    set_nb_cartes_joueuse(JOUEUSE_2, NB_CARTES_MAIN_DEBUT);
+    for(int i=0;i<NB_CARTES_MAIN_DEBUT;i++){
+        int alea = rand() % 20;
+        carte carte_alea=get_carte(alea);
+        carte* cartes_joueuse=get_cartes_joueuse(JOUEUSE_2);
+
+        // tant que la carte est déjà dans la main de la joueuse 1, on tire une autre carte
+        while(is_in((void**)cartes_joueuse,(void*)carte_alea,i)){
+            alea = rand() % 20;
+            carte_alea=get_carte(alea);
+        }
+        cartes_joueuse[i]=carte_alea;
+
+    }
+
+
+
     // Initialisation du monstre
     set_zone_personnage(MONSTRE_PERS,1);
     get_tab_perso_zone(getZoneById(ZONES,1))[0]=MONSTRE_PERS;
@@ -266,6 +311,7 @@ void free_interface() {
     freeCarte(&DIMITRI_WATEL);
     freeCarte(&MARIE_SZAFRANSKI);
     freeCarte(&JULIEN_FOREST);
+    freeCarte(&LAURENT_PREVEL);
 }
 
 /// @brief déplacement des personnages et des monstres
@@ -314,7 +360,7 @@ void apply_effet_deplacement(){
     personnage* membres_ecole1 = get_membres_joueuse(JOUEUSE_1);
     int nb_membres_ecole1 = get_nb_membres_joueuse(JOUEUSE_1);
     for(int i=0;i<nb_membres_ecole1;i++){
-        if(get_zone_personnage(membres_ecole1[i])==get_zone_personnage(MONSTRE_PERS)){
+        if(get_zone_personnage(membres_ecole1[i])==get_zone_personnage(MONSTRE_PERS) && !isEaten(membres_ecole1[i])){
             set_vie_personnage(membres_ecole1[i],MANGE);
             afficher_membre_mange(membres_ecole1[i]);
         }
@@ -324,7 +370,7 @@ void apply_effet_deplacement(){
     personnage* membres_ecole2 = get_membres_joueuse(JOUEUSE_2);
     int nb_membres_ecole2 = get_nb_membres_joueuse(JOUEUSE_2);
     for(int i=0;i<nb_membres_ecole2;i++){
-        if(get_zone_personnage(membres_ecole2[i])==get_zone_personnage(MONSTRE_PERS)){
+        if(get_zone_personnage(membres_ecole2[i])==get_zone_personnage(MONSTRE_PERS) && !isEaten(membres_ecole2[i])){
             set_vie_personnage(membres_ecole2[i],MANGE);
             afficher_membre_mange(membres_ecole2[i]);
         }

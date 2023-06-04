@@ -112,6 +112,19 @@ void set_tab_perso_zone(zone zon, personnage* tab_perso, int nb_perso)
     zon->nb_perso = nb_perso;
 }
 
+/// @brief modification de la matrice de probabilité
+/// @param zones pointeur sur les zones
+/// @param matrice nouvelle matrice de probabilité
+void set_matrice_proba(zones zones, double** matrice)
+{
+    int nb_zn = get_nb_zones(zones);
+    for(int i=0;i<nb_zn;i++){
+        for(int j=0;j<nb_zn;j++){
+            zones->matriceProba[i][j]=matrice[i][j];
+        }
+    }
+}
+
 
 
 
@@ -188,4 +201,15 @@ int getNextZone(zone zone) {
     int l = sim_dis(matrice[zn-1],x,10);
     free_matrice(&matrice,10);
     return l;
+}
+
+void apply_decision(zones zones,int capital,int zone1,int zone2,int zone3 ){
+    double** matrice=get_matrice_proba(zones);
+    if(capital*0.1>matrice[zone1-1][zone2-1]){
+        printf("Capital insuffiant pour effectuer ces actions.\n");
+        return;
+    }
+    matrice[zone1-1][zone2-1]-=capital*0.1;
+    matrice[zone1-1][zone3-1]+=capital*0.1;
+    set_matrice_proba(zones,matrice);
 }

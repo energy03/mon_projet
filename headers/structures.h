@@ -23,6 +23,13 @@ void remove_element(E tab[], E element,int* size);
 /// @param nb_lignes nombre de lignes de la matrice
 void free_matrice(double*** matrice, int nb_lignes);
 
+/// @brief fonction verifiant si un element est dans un tableau de void*
+/// @param tab tableau de void*
+/// @param element element a verifier
+/// @param size taille du tableau
+/// @return 1 si l'element est dans le tableau, 0 sinon
+int is_in(E tab[], E element, int size);
+
 
 
 #endif // STRUCTURES_H

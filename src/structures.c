@@ -73,6 +73,21 @@ void remove_element(E tab[],E element, int *size)
 }
 
 
+/// @brief fonction verifiant si un element est dans un tableau de void*
+/// @param tab tableau de void*
+/// @param element element a verifier
+/// @param size taille du tableau
+/// @return 1 si l'element est dans le tableau, 0 sinon
+int is_in(E tab[], E element, int size)
+{
+    for(int i=0;i<size;i++){
+        if(tab[i] == element){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 /// @brief fonction liberant memoire allouée à une matrice
 /// @param matrice matrice à libérer
 /// @param nb_lignes nombre de lignes de la matrice

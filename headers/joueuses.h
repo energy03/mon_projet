@@ -101,7 +101,7 @@ personnage* get_membres_joueuse(joueuse player);
 /// @brief recupération du tableau de cartes d'une joueuse
 /// @param player pointeur sur la joueuse
 /// @return tableau de cartes de la joueuse
-int* get_cartes_joueuse(joueuse player);
+carte* get_cartes_joueuse(joueuse player);
 
 /// @brief recupération du tour d'une joueuse
 /// @param player pointeur sur la joueuse
@@ -138,7 +138,7 @@ void set_membres_joueuse(joueuse player, personnage* membres, int nb_membres);
 /// @brief modification du tableau de cartes d'une joueuse
 /// @param player pointeur sur la joueuse
 /// @param cartes nouveau tableau de cartes de la joueuse
-void set_cartes_joueuse(joueuse player, int* cartes, int nb_cartes);
+void set_cartes_joueuse(joueuse player, carte* cartes, int nb_cartes);
 
 /// @brief modification du tour d'une joueuse
 /// @param player pointeur sur la joueuse

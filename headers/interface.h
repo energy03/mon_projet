@@ -26,7 +26,7 @@ Fonction pour demander à une joueuse si elle veut jouer une carte et si oui, la
 Si elle ne désire pas jouer une carte, on retourne NULL
 on affichera le joueur a qui c'est le tour
 */
-carte demander_carte_joueuse();
+carte demander_carte_joueuse(joueuse joueuse); //-----
 
 /*
 Fonction pour afficher un message quand le jeu est fini

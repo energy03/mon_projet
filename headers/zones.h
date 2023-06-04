@@ -56,7 +56,7 @@ zone getZoneById(zones zones, int numZone);
 
 
 /*Fonction pour application les décisions des joueuses */
-void apply_decision(zones zones,int capital);
+void apply_decision(zones zones,int capital,int zone1,int zone2,int zone3);
 
 /*Fonction pour récupérer une zone successeur aléatoire d'une zone donnée*/
 int getNextZone(zone zone);
@@ -75,6 +75,11 @@ int getNextZone(zone zone);
 /// @param zones pointeur sur les zones
 /// @return nombre de zones
 int get_nb_zones(zones zones);
+
+/// @brief recupération de la matrice de probabilités entre les zones
+/// @param zones pointeur sur les zones
+/// @return matrice de probabilités entre les zones
+double** get_matrice_proba(zones zones);
 
 
 /// @brief recupération du nombre de personnages dans une zone
@@ -115,6 +120,11 @@ void set_nb_zones(zones zones, int nb_zones);
 /// @param tab_perso nouveau tableau de personnages de la zone
 /// @param nb_perso nouveau nombre de personnages dans la zone
 void set_tab_perso_zone(zone zon, personnage* tab_perso, int nb_perso);
+
+/// @brief modification de la matrice de probabilités entre les zones
+/// @param zones pointeur sur les zones
+/// @param matrice_proba nouvelle matrice de probabilités entre les zones
+void set_matrice_proba(zones zones, double** matrice_proba);
 
 
 
